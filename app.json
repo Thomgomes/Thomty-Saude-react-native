@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "thomty-saude",
+    "slug": "thomty-saude",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
