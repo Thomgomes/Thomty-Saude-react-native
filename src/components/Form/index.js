@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Text, TextInput, View, TouchableOpacity } from 'react-native';
-import ResultIMC from './ResultIMC';
 import { StyleSheet } from 'react-native';
+import { TextInputMask } from 'react-native-masked-text'
+import ResultIMC from './ResultIMC';
 import Table from '../Table';
 
 export default function Form() {
@@ -14,7 +15,7 @@ export default function Form() {
     const imcResult = imc + " kg/m²"
 
     function imcCalculator() {
-        return setImc((weight / (height * height)).toFixed(2))
+        return setImc(((weight * 10000) / (height * height)).toFixed(2))
     }
 
     function validationImc() {
@@ -38,7 +39,8 @@ export default function Form() {
                     style={styles.input}
                     onChangeText={setHeight}
                     value={height}
-                    placeholder='ex: 1.75cm'
+                    maxLength={3}
+                    placeholder='ex: 175cm'
                     keyboardType='numeric'
                 />
 
@@ -47,6 +49,7 @@ export default function Form() {
                     style={styles.input}
                     onChangeText={setWeight}
                     value={weight}
+                    maxLength={5}
                     placeholder='ex: 78.66 kg'
                     keyboardType='numeric'
                 />
@@ -61,7 +64,7 @@ export default function Form() {
                 messageResultImc={messageImc}
                 resultImc={(imc === null) ? imc : imcResult}
             />
-            <Table/>
+            <Table />
         </View>
     )
 }

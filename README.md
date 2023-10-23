@@ -27,4 +27,8 @@ Inicie o servidor
 
 ```bash
   npx expo start
+
+  ou
+
+  expo start
 ```
