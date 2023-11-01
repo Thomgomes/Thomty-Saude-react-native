@@ -13,10 +13,13 @@ export default function ResultIMC(props){
 
 const styles = StyleSheet.create({
     result: {
-        marginLeft: 30
+        marginBottom: 6,
+        marginTop: 6,
+        alignItems: 'center',
+        width: '100%',
     },
     textResult: {
-        color: '#808080',
+        color: '#6AB7E2',
         fontWeight: '600',
         fontSize: 18,
     }

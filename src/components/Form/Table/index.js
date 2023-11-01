@@ -15,19 +15,14 @@ export default function Table() {
     const item = ({ item }) => {
         return (
             <View style={styles.flexRow}>
-                {/* <View>
-                    <View style={styles.tableItens}>
-                        <Text>{item.imcValue}</Text>
-                    </View>
-                </View> */}
                 <View>
-                    <View style={(item.id & 1) ? [styles.tableItens , styles.tableItensColor] : styles.tableItens}>
+                    <View style={(item.id & 1) ? [styles.tableItens, styles.tableItensColor] : styles.tableItens}>
                         <Text>{item.imcValue}</Text>
                     </View>
                 </View>
 
                 <View>
-                    <View style={(item.id & 1) ? [styles.tableItens , styles.tableItensColor] : styles.tableItens}>
+                    <View style={(item.id & 1) ? [styles.tableItens, styles.tableItensColor] : styles.tableItens}>
                         <Text>{item.classficação}</Text>
                     </View>
                 </View>
@@ -36,16 +31,6 @@ export default function Table() {
     }
 
     return (
-        // <View>
-        //     <Text>Futuras tabelas</Text>
-        //     <Text>IMC</Text>
-        //     <Text>Peso</Text>
-        //     <Text></Text>
-        //     <Text>Magreza</Text>
-        //     <Text>Normal</Text>
-        //     <Text>Sobrepeso</Text>
-        //     <Text>Obesidade</Text>
-        // </View>
         <View style={styles.tableMain}>
             <View style={[styles.flexRow, styles.distance]}>
                 <Text>IMC (kg/m²)</Text>

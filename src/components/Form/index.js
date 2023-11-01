@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View, TouchableOpacity } from 'react-native';
-import { StyleSheet } from 'react-native';
-import { TextInputMask } from 'react-native-masked-text'
+import { Text, TextInput, View, TouchableOpacity, StyleSheet } from 'react-native';
 import ResultIMC from './ResultIMC';
-import Table from '../Table';
+import Table from './Table';
+import { Vibration } from 'react-native';
 
 export default function Form() {
     const [height, setHeight] = useState(null)
@@ -11,6 +10,7 @@ export default function Form() {
     const [messageImc, setMessageImc] = useState("preencha o peso e a altura")
     const [imc, setImc] = useState(null)
     const [textButton, setTextButton] = useState("Calcular IMC")
+    const [messageError, setMessageError] = useState('')
 
     const imcResult = imc + " kg/m²"
 
@@ -18,13 +18,22 @@ export default function Form() {
         return setImc(((weight * 10000) / (height * height)).toFixed(2))
     }
 
+    function verificationImc() {
+        if (imc == null) {
+            Vibration.vibrate()
+            setMessageError('Campo Obrigatorio *')
+        }
+    }
+
     function validationImc() {
         if (weight != null && height != null) {
             imcCalculator()
             setMessageImc("Seu imc é igual:")
             setTextButton("Calcular novamente")
+            setMessageError(null)
             return
         }
+        verificationImc()
         setImc(null)
         setTextButton("Calcular IMC")
         setMessageImc("preencha o peso e a altura")
@@ -35,6 +44,7 @@ export default function Form() {
             <View style={styles.formContext}>
 
                 <Text style={styles.formLabel}>Altura</Text>
+                {messageError === '' || height !== null ? null : <Text style={styles.messageError}>{messageError}</Text>}
                 <TextInput
                     style={styles.input}
                     onChangeText={setHeight}
@@ -45,6 +55,7 @@ export default function Form() {
                 />
 
                 <Text style={styles.formLabel}>Peso</Text>
+                {messageError === '' || weight !== null ? null : <Text style={styles.messageError}>{messageError}</Text>}
                 <TextInput
                     style={styles.input}
                     onChangeText={setWeight}
@@ -92,6 +103,13 @@ const styles = StyleSheet.create({
         fontSize: 18,
         paddingLeft: 20,
     },
+    messageError: {
+        color: 'red',
+        fontWeight: '600',
+        fontSize: 8,
+        paddingLeft: 20,
+        margin: 0
+    },
     input: {
         width: '90%',
         borderRadius: 50,
@@ -109,7 +127,7 @@ const styles = StyleSheet.create({
         paddingTop: 14,
         paddingBottom: 14,
         marginLeft: 12,
-        margin: 30,
+        marginTop: 30,
 
     },
     textButtonCalculator: {

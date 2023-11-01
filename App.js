@@ -16,7 +16,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#6AB7E2',
-    paddingTop: 80,
+    paddingTop: 50,
 
   },
 });
