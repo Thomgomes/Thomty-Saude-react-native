@@ -49,7 +49,7 @@ export default function Form() {
                     style={styles.input}
                     onChangeText={setWeight}
                     value={weight}
-                    maxLength={5}
+                    maxLength={6}
                     placeholder='ex: 78.66 kg'
                     keyboardType='numeric'
                 />
