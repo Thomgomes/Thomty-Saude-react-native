@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Text, TextInput, View, TouchableOpacity, StyleSheet, Vibration, Pressable, Keyboard } from 'react-native';
 import ResultIMC from './ResultIMC';
 import Table from './Table';
+import * as Animatable from 'react-native-animatable'
 
 export default function Form() {
     const [height, setHeight] = useState(null)
@@ -44,9 +45,9 @@ export default function Form() {
     }
 
     return (
-        <View style={styles.main}>
+        <Animatable.View animation='fadeInUp' delay={250} style={styles.main}>
             {imc == null ?
-                <View style={styles.formContext}>
+                <Animatable.View animation='fadeIn' style={styles.formContext}>
 
                     <Text style={styles.formLabel}>Altura</Text>
                     {messageError === '' || height !== null ? null : <Text style={styles.messageError}>{messageError}</Text>}
@@ -76,25 +77,29 @@ export default function Form() {
                         <Text style={styles.textButtonCalculator}>{textButton}</Text>
                     </TouchableOpacity>
                     <Table />
-                </View>
+                </Animatable.View>
                 :
                 <View style={styles.resultView}>
-                    <TouchableOpacity
-                        style={[styles.buttonCalculator, styles.onResultView]}
-                        onPress={() => validationImc()}
-                    >
-                        <Text style={styles.textButtonCalculator}>{textButton}</Text>
-                    </TouchableOpacity>
-                    <ResultIMC
-                        messageResultImc={messageImc}
-                        resultImc={(imc === null) ? imc : imcResult}
-                    />
-                    <Table />
+                    <Animatable.View animation='fadeIn' delay={250}>
+                        <TouchableOpacity
+                            style={[styles.buttonCalculator, styles.onResultView]}
+                            onPress={() => validationImc()}
+                        >
+                            <Text style={styles.textButtonCalculator}>{textButton}</Text>
+                        </TouchableOpacity>
+                        <ResultIMC
+                            messageResultImc={messageImc}
+                            resultImc={(imc === null) ? imc : imcResult}
+                        />
+                    </Animatable.View>
+                    <Animatable.View animation='fadeInUp' delay={400}>
+                        <Table />
+                    </Animatable.View>
                 </View>
             }
 
 
-        </View>
+        </Animatable.View>
     )
 }
 

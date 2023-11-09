@@ -1,10 +1,14 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from 'react';
+import Container from '../../components/Container';
+import Title from '../../components/Title';
+import Form from '../../components/Form';
 
-export default function index() {
+export default function Calculator() {
   return (
-    <View>
-      <Text>index</Text>
-    </View>
+    <Container>
+      <Title/>
+      <Form/>
+    </Container>
+
   )
 }
