@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, TextInput, View, TouchableOpacity, StyleSheet, Vibration, Pressable, Keyboard } from 'react-native';
 import ResultIMC from './ResultIMC';
 import Table from './Table';
-import { Vibration } from 'react-native';
 
 export default function Form() {
     const [height, setHeight] = useState(null)
@@ -15,7 +14,10 @@ export default function Form() {
     const imcResult = imc + " kg/m²"
 
     function imcCalculator() {
-        return setImc(((weight * 10000) / (height * height)).toFixed(2))
+        let validar = /(?:\.|,)/
+        let heightFormat = height.replace(validar, "")
+        let weightFormat = weight.replace(",", ".")
+        return setImc(((weightFormat * 10000) / (heightFormat * heightFormat)).toFixed(2))
     }
 
     function verificationImc() {
@@ -28,54 +30,70 @@ export default function Form() {
     function validationImc() {
         if (weight != null && height != null) {
             imcCalculator()
+            setHeight(null)
+            setWeight(null)
             setMessageImc("Seu imc é igual:")
             setTextButton("Calcular novamente")
             setMessageError(null)
-            return
+        } else {
+            verificationImc()
+            setImc(null)
+            setTextButton("Calcular IMC")
+            setMessageImc("preencha o peso e a altura")
         }
-        verificationImc()
-        setImc(null)
-        setTextButton("Calcular IMC")
-        setMessageImc("preencha o peso e a altura")
     }
 
     return (
         <View style={styles.main}>
-            <View style={styles.formContext}>
+            {imc == null ?
+                <View style={styles.formContext}>
 
-                <Text style={styles.formLabel}>Altura</Text>
-                {messageError === '' || height !== null ? null : <Text style={styles.messageError}>{messageError}</Text>}
-                <TextInput
-                    style={styles.input}
-                    onChangeText={setHeight}
-                    value={height}
-                    maxLength={3}
-                    placeholder='ex: 175cm'
-                    keyboardType='numeric'
-                />
+                    <Text style={styles.formLabel}>Altura</Text>
+                    {messageError === '' || height !== null ? null : <Text style={styles.messageError}>{messageError}</Text>}
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={setHeight}
+                        value={height}
+                        maxLength={4}
+                        placeholder='ex: 175cm'
+                        keyboardType='numeric'
+                    />
 
-                <Text style={styles.formLabel}>Peso</Text>
-                {messageError === '' || weight !== null ? null : <Text style={styles.messageError}>{messageError}</Text>}
-                <TextInput
-                    style={styles.input}
-                    onChangeText={setWeight}
-                    value={weight}
-                    maxLength={6}
-                    placeholder='ex: 78.66 kg'
-                    keyboardType='numeric'
-                />
-                <TouchableOpacity
-                    style={styles.buttonCalculator}
-                    onPress={() => validationImc()}
-                >
-                    <Text style={styles.textButtonCalculator}>{textButton}</Text>
-                </TouchableOpacity>
-            </View>
-            <ResultIMC
-                messageResultImc={messageImc}
-                resultImc={(imc === null) ? imc : imcResult}
-            />
-            <Table />
+                    <Text style={styles.formLabel}>Peso</Text>
+                    {messageError === '' || weight !== null ? null : <Text style={styles.messageError}>{messageError}</Text>}
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={setWeight}
+                        value={weight}
+                        maxLength={6}
+                        placeholder='ex: 78.66 kg'
+                        keyboardType='numeric'
+                    />
+                    <TouchableOpacity
+                        style={[styles.buttonCalculator, styles.onMainView]}
+                        onPress={() => validationImc()}
+                    >
+                        <Text style={styles.textButtonCalculator}>{textButton}</Text>
+                    </TouchableOpacity>
+                    <Table />
+                </View>
+                :
+                <View style={styles.resultView}>
+                    <TouchableOpacity
+                        style={[styles.buttonCalculator, styles.onResultView]}
+                        onPress={() => validationImc()}
+                    >
+                        <Text style={styles.textButtonCalculator}>{textButton}</Text>
+                    </TouchableOpacity>
+                    <ResultIMC
+                        messageResultImc={messageImc}
+                        resultImc={(imc === null) ? imc : imcResult}
+                    />
+                    <Table />
+                </View>
+            }
+
+
         </View>
     )
 }
@@ -126,12 +144,24 @@ const styles = StyleSheet.create({
         width: '90%',
         paddingTop: 14,
         paddingBottom: 14,
-        marginLeft: 12,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    },
+    onMainView: {
         marginTop: 30,
-
+    },
+    onResultView: {
+        marginTop: 10,
+        marginBottom: 5,
     },
     textButtonCalculator: {
         fontSize: 20,
         color: '#fff'
     },
+    resultView: {
+        width: '100%',
+        height: 'auto',
+        marginTop: 30,
+        padding: 10,
+    }
 });

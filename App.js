@@ -1,15 +1,15 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Pressable, Keyboard } from 'react-native';
 import Title from './src/components/Title';
 import Form from './src/components/Form';
 
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <Pressable onPress={Keyboard.dismiss} style={styles.container}>
       <Title/>
       <Form/>
-    </View>
+    </Pressable>
   );
 }
 

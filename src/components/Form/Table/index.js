@@ -48,7 +48,8 @@ export default function Table() {
 
 const styles = StyleSheet.create({
     tableMain: {
-        width: '80%',
+        width: '90%',
+        marginTop: 30,
         marginLeft: 'auto',
         marginRight: 'auto',
         alignItems: 'center',
@@ -63,11 +64,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     distance: {
-        gap: 78,
+        gap: 90,
         marginVertical: 10
     },
     tableItens: {
-        width: 160,
+        width: 170,
         alignItems: 'center',
         padding: 5,
     },
