@@ -44,6 +44,25 @@ export default function Form() {
         }
     }
 
+    // const SwitchTable = () => {
+
+    //         if (imc < 18.5){
+    //             return <Text>De acordo com a Organização Mundial da Saúde, seu IMC está abaixo do recomendado para a sua altura. Para atingir um valor de IMC normal, seu peso deve estar entre 60.6 e 81.6 kg.</Text>
+    //         }else if (imc > 18.5 && imc < 24.9){
+    //             return <Text>De acordo com a Organização Mundial da Saúde, seu IMC é considerado normal para a sua altura. Para manter o valor de IMC normal, seu peso pode variar entre 60.6 e 81.6 kg.</Text>
+    //         }else if(imc > 25 && imc < 29.9){
+    //             return <Text>De acordo com a Organização Mundial da Saúde, seu IMC está acima do recomendado para a sua altura. Para atingir um valor de IMC normal, seu peso deve estar entre 60.6 e 81.6 kg.</Text>
+    //         }else if(imc > 30 && imc < 34.9){
+    //             return <Text>Segundo a Organização Mundial da Saúde, seu IMC está acima do recomendado para a sua altura, chegando ao grau de obesidade I. Para atingir um valor de IMC normal, seu peso deve estar entre 60.6 e 81.6 kg.</Text>
+    //         }else if(imc > 35 && imc < 39.9){
+    //             return <Text>Segundo a Organização Mundial da Saúde, seu IMC está acima do recomendado para a sua altura, chegando ao grau de obesidade I. Para atingir um valor de IMC normal, seu peso deve estar entre 60.6 e 81.6 kg.</Text>
+    //         }else if(imc > 40){
+    //             return <Text>Segundo a Organização Mundial da Saúde, seu IMC está acima do recomendado para a sua altura, chegando ao grau de obesidade I. Para atingir um valor de IMC normal, seu peso deve estar entre 60.6 e 81.6 kg.</Text>
+
+    //         }
+
+    // }
+
     return (
         <Animatable.View animation='fadeInUp' delay={250} style={styles.main}>
             {imc == null ?
@@ -76,7 +95,7 @@ export default function Form() {
                     >
                         <Text style={styles.textButtonCalculator}>{textButton}</Text>
                     </TouchableOpacity>
-                    <Table />
+                    {/* <Table /> */}
                 </Animatable.View>
                 :
                 <View style={styles.resultView}>
