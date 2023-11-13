@@ -2,7 +2,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack'
 
 import Welcome from '../pages/Welcome'
 import Calculator from '../pages/Calculator'
-import Result from '../pages/Result'
 
 const Stack = createNativeStackNavigator();
 
